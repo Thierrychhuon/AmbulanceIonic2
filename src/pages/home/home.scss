@@ -1,3 +1,87 @@
+@import url("bootstrap.min.css");
+@import url("base-sizing.css");
+
 page-home {
+  /*--------------------------------------------------------------*\
+                                INTERFACE
+  \*--------------------------------------------------------------*/
+
+  /* Header */
+  .custom-header{
+    text-align: center;
+  }
+  .page-mark-light{
+    border-top: 10px solid #bde0fc;
+    margin-bottom: 10px;
+  }
+  .page-mark-dark{
+    border-top: 10px solid #1c80d0;
+    margin-bottom: 10px;
+  }
+
+  .title-font-big ion-title{
+    font-size: 50px;
+  }
+
+  /* Body */
+  .panel{
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .register-titles{
+    text-align: center;
+    text-transform: uppercase;
+    color:#1c80d0 ;
+  }
+
+  /* Footer */
+
+  /* Divers */
+
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+
+  .row-custom{
+      margin-top:40px;
+      padding: 0 10px;
+  }
+
+  .clickable{
+      cursor: pointer;
+  }
+
+  .panel-heading span {
+  	margin-top: -20px;
+  	font-size: 15px;
+  }
+
+  p {
+    font-size: 0.8em;
+    color: #d2d2d2;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  ion-label, .select-text {
+    margin-left: 10px;
+  }
+
+  ion-input, ion-select, ion-textarea {
+    background-color: #f2f2f2;
+    padding: 5px 10px;
+  }
+
+  .invalid {
+    border: 1px solid #ea6153;
+  }
 
 }
