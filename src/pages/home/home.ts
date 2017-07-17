@@ -8,10 +8,11 @@ import { NavController, Slides } from 'ionic-angular';
 })
 export class HomePage {
 
-  @ViewChild('signupSlider') signupSlider: any;
+  @ViewChild('signUpSlider') signUpSlider: Slides ;
 
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
+  public slideThreeForm: FormGroup;
 
   submitAttempt: boolean = false;
 
@@ -21,6 +22,7 @@ export class HomePage {
       firstName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       lastName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       email: [''],
+      gender: ['', Validators.required],
       telephone: ['']
     });
 
@@ -30,23 +32,27 @@ export class HomePage {
       bio: ['']
     });
 
+    this.slideThreeForm = this.formBuilder.group({
+      biolo: ['']
+    });
+
   }
 
   next(){
-        this.signupSlider.slideNext();
+        this.signUpSlider.slideNext();
     }
 
   prev(){
-      this.signupSlider.slidePrev();
+      this.signUpSlider.slidePrev();
   }
 
   save(){
     this.submitAttempt = true;
     if(!this.slideOneForm.valid){
-        this.signupSlider.slideTo(0);
+        this.signUpSlider.slideTo(0);
     }
     else if(!this.slideTwoForm.valid){
-        this.signupSlider.slideTo(1);
+        this.signUpSlider.slideTo(1);
     }
     else {
         console.log("success!")
