@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { NavController, Slides } from 'ionic-angular';
 import { HospitalValidator } from  '../../validators/hospital';
+import { ButtonCheckbox } from '../../component/button-radio.component'
 
 @Component({
   selector: 'page-home',
@@ -16,7 +17,12 @@ export class HomePage {
   public slideThreeForm: FormGroup;
   public arrowLeft: string;
   public arrowRight: string;
+  public currentSlide: string;
+  //Switch button or toggle button contains 1 or 0
+  switchButtonState: boolean = false;
+  switchButtonState2: boolean = false;
   //public title: string;
+  show: boolean = true;
 
   submitAttempt: boolean = false;
   otherSelected: boolean = false;
@@ -26,6 +32,7 @@ export class HomePage {
 
     this.arrowLeft = 'none';
     this.arrowRight='Medical providers';
+    this.currentSlide="Identification";
     //this.title = 'Initial title';
 
     this.slideOneForm = this.formBuilder.group({
@@ -38,8 +45,7 @@ export class HomePage {
 
     this.slideTwoForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'),Validators.required])],
-      privacy: ['', Validators.required],
-      bio: ['']
+      privacy: ['', Validators.required]
     });
 
     this.slideThreeForm = this.formBuilder.group({
@@ -82,14 +88,21 @@ export class HomePage {
     if(currentIndex == 0){
       this.arrowLeft = 'none';
       this.arrowRight='Medical providers';
+      this.currentSlide="Identification";
+
     }else if(currentIndex == 1){
       this.arrowLeft = 'Identification';
       this.arrowRight='Health problems';
+      this.currentSlide="Medical providers";
     }else{
       this.arrowLeft = 'Identification';
       this.arrowRight='none';
+      this.currentSlide="Health problems";
     }
     //this.title = "Slider " + currentIndex;
   }
 
+  test(){
+    console.log(this.switchButtonState);
+  }
 }
