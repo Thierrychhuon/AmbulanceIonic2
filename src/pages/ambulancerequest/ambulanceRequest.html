@@ -1,0 +1,38 @@
+<!-- Start Header -->
+<ion-header no-border >
+  <!-- hideBackButton="true" -->
+  <ion-navbar color="whitedanger" padding-top text-center>
+    <ion-title> Request for Mrs/M. </ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- End Header -->
+
+<!-- Start Content -->
+<ion-content>
+  <!-- Start: Slide Title Bar -->
+  <ion-grid ion-fixed progressbar>
+    <ion-row>
+      <ion-col no-padding col-6>
+        <hr class="page-mark-dark">
+        <p class="register-titles-dark" (click)="goToLocation()" tappable> Location </p>
+      </ion-col>
+      <ion-col no-padding col-6>
+        <hr class="page-mark-light">
+        <p class="register-titles-light" (click)="goToSymptoms()" tappable> Symptoms </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides #ambulanceSlider>
+    <ion-slide>
+        <p> Google map</p>
+    </ion-slide>
+
+    <ion-slide>
+        <p> Symptoms</p>
+        <!-- Select not enough effective -> ion card ? accordion list ? Custom Form? -->
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+<!-- End Content -->

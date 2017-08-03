@@ -1,5 +1,5 @@
-@import url("bootstrap.min.css");
-@import url("base-sizing.css");
+//@import url("bootstrap.min.css");
+//@import url("base-sizing.css");
 
 page-home {
   /*--------------------------------------------------------------*\
@@ -88,11 +88,22 @@ page-home {
 
   ion-grid, .progressbar {
     padding-top: 0px !important;
-    font-size: 16px;
   }
 
   ion-slide {
-    margin-top: 20px;
+    margin-top: 5%;
+  }
+
+  ion-slide, .scroll{
+    overflow-y: scroll;
+  }
+
+  .ios, .md {
+    page-home {
+        button {
+            align-items: baseline;
+        }
+    }
   }
 
 }

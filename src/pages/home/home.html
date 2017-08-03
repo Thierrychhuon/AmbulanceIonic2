@@ -1,12 +1,12 @@
 <!-- Start Header -->
 <ion-header no-border >
-  <ion-navbar color="white" padding-top>
-    <!-- Start: Title + Arrows -->
+  <ion-navbar color="whiteprimary" padding-top>
+    <!-- Start: Title + Arrows
     <ion-row justify-content-center>
       <ion-col col-4>
         <ion-buttons start *ngIf='arrowLeft!="none"'>
           <button ion-button icon-left (click)="prev()">
-            <ion-icon name="arrow-back"></ion-icon>
+            <ion-icon name="arrow-round-back"></ion-icon>
             {{arrowLeft}}
           </button>
         </ion-buttons>
@@ -20,12 +20,15 @@
         <ion-buttons end *ngIf='arrowRight!="none"'>
           <button ion-button icon-right (click)="next()">
             {{arrowRight}}
-            <ion-icon name="arrow-forward"></ion-icon>
+            <ion-icon name="arrow-round-forward"></ion-icon>
           </button>
         </ion-buttons>
       </ion-col>
     </ion-row>
-    <!-- End: Title + Arrows -->
+     End: Title + Arrows -->
+    <ion-title text-center>
+      Register
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <!-- End Header -->
@@ -85,7 +88,7 @@
     <!-- Start Slide Register 1 -->
     <ion-slide>
 
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
+      <p *ngIf="submitAttempt" style="color: #ea6153;"><br />Please fill out all details accurately. </p>
 
       <ion-list no-lines>
       <!-- Form: Basics information "slideOneForm" -->
@@ -113,22 +116,31 @@
           <!-- Email -->
           <ion-item>
             <ion-label floating>Email address</ion-label>
-            <ion-input formControlName="email" type="email"></ion-input>
+            <ion-input formControlName="email" type="text" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)"></ion-input>
             <sub>We'll never give the address to ....</sub>
           </ion-item>
+
+          <ion-item *ngIf="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)">
+              <p>Please enter a valid email.</p>
+          </ion-item>
+
           <!-- Telephone -->
           <ion-item>
             <ion-label floating>Telephone</ion-label>
-            <ion-input formControlName="telephone" type="tel"></ion-input>
+            <ion-input formControlName="telephone" type="tel"[class.invalid]="!slideOneForm.controls.telephone.valid && (slideOneForm.controls.telephone.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="!slideOneForm.controls.telephone.valid && (slideOneForm.controls.telephone.dirty || submitAttempt)">
+              <p>Please enter a valid tel.</p>
           </ion-item>
 
           <!-- Gender -->
           <ion-item>
               <ion-label floating>Gender</ion-label>
               <ion-select [class.invalid]="!slideOneForm.controls.gender.valid && (slideOneForm.controls.gender.dirty || submitAttempt)" formControlName="gender">
-                  <ion-option value="public" checked="true">Female</ion-option>
-                  <ion-option value="friends">Male</ion-option>
-                  <ion-option value="private">Other</ion-option>
+                  <ion-option value="female" checked="true">Female</ion-option>
+                  <ion-option value="male">Male</ion-option>
+                  <ion-option value="other">Other</ion-option>
               </ion-select>
           </ion-item>
 
@@ -138,10 +150,11 @@
             <ion-datetime displayFormat="MMMM DD, YYYY" pickerFormat="MMMM DD YYYY"></ion-datetime>
           </ion-item>
 
-          <!-- Submit button -->
+          <!-- Submit button
           <div class="text-center">
-            <button ion-button round>Save</button>
+            <button ion-button round (click)="save()">Save</button>
           </div>
+          -->
         </form>
         <!-- End Form: Basics information -->
       </ion-list>
@@ -150,126 +163,121 @@
     <!-- End Slide Register 1 -->
 
     <!-- Start Slide Register 2 -->
-    <ion-slide>
+    <ion-slide scroll>
       <ion-list no-lines>
         <!-- Form: Medical Providers information -->
         <form [formGroup]="slideTwoForm">
-
           <!-- Hospital 1 -->
           <ion-item>
               <ion-label floating>Hospital</ion-label>
-              <ion-select [class.invalid]="!slideTwoForm.controls.privacy.valid && (slideTwoForm.controls.privacy.dirty || submitAttempt)" formControlName="privacy" #selectedHospital>
-                  <ion-option value="public" checked="true">Public</ion-option>
-                  <ion-option value="friends">Friends Only</ion-option>
-                  <ion-option value="private">Private</ion-option>
-                  <ion-option value="public" checked="true">Public</ion-option>
-                  <ion-option value="friends2">Friends Only</ion-option>
-                  <ion-option value="private2">Private</ion-option>
+              <ion-select [class.invalid]="!slideTwoForm.controls.hospital.valid && (slideTwoForm.controls.hospital.dirty || submitAttempt)" formControlName="hospital" #selectedHospital>
+                  <ion-option value="hopital1" checked="true">Hopital 1</ion-option>
+                  <ion-option value="hopital2">Hopital 2</ion-option>
+                  <ion-option value="hopital3">Hopital 3</ion-option>
+                  <ion-option value="hopital4">Hopital 4</ion-option>
+                  <ion-option value="hopital5">Hopital 5</ion-option>
+                  <ion-option value="hopital6">Hopital 6</ion-option>
                   <ion-option value="other">Other</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item *ngIf='selectedHospital.value == "other"'>
               <br />
-              <ion-input type="text" placeholder="Please enter your hospital"></ion-input>
+              <ion-input name="hospital" type="text" placeholder="Please enter your hospital"></ion-input>
           </ion-item>
 
           <!-- Personnal doctor -->
           <ion-item>
-              <ion-label floating>Personnal doctor</ion-label>
-              <ion-input [class.invalid]="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)" formControlName="username" type="text"></ion-input>
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor.valid && (slideTwoForm.controls.personnalDoctor.dirty || submitAttempt)" formControlName="personnalDoctor" type="text"></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)">
-              <p>Sorry, that username can not be used!</p>
+          <ion-item *ngIf="!slideTwoForm.controls.personnalDoctor.valid && (slideTwoForm.controls.personnalDoctor.dirty || submitAttempt)">
+              <p>Please enter a personal doctor.</p>
           </ion-item>
           <!-- End Hospital 1 -->
 
           <!-- Hospital 2-->
           <br />
-          <ion-buttons start>
-            <button ion-button (click)="switchButtonState = !switchButtonState">
+          <ion-buttons start text-left>
+            <button ion-button outline clear large (click)="switchButtonState = !switchButtonState" icon-only>
               <ion-icon name="add-circle"></ion-icon>
-              Test
             </button>
           </ion-buttons>
 
-<!-- Test
-          <ion-item>
-            <ion-label>Switch</ion-label>
-            <ion-toggle [(ngModel)]="switch" disabled="true"></ion-toggle>
-          </ion-item>
--->
           <ion-item [hidden]="!switchButtonState">
             <ion-label floating>Hospital</ion-label>
-            <ion-select [class.invalid]="!slideTwoForm.controls.privacy.valid && (slideTwoForm.controls.privacy.dirty || submitAttempt)" formControlName="privacy" #selectedHospital2>
-                <ion-option value="public" checked="true">Public</ion-option>
-                <ion-option value="friends">Friends Only</ion-option>
-                <ion-option value="private">Private</ion-option>
-                <ion-option value="public" checked="true">Public</ion-option>
-                <ion-option value="friends2">Friends Only</ion-option>
-                <ion-option value="private2">Private</ion-option>
-                <ion-option value="other">Other</ion-option>
+            <ion-select [class.invalid]="!slideTwoForm.controls.hospital2.valid && (slideTwoForm.controls.hospital2.dirty || submitAttempt)" formControlName="hospital2" #selectedHospital2>
+              <ion-option value="hopital1" checked="true">Hopital 1</ion-option>
+              <ion-option value="hopital2">Hopital 2</ion-option>
+              <ion-option value="hopital3">Hopital 3</ion-option>
+              <ion-option value="hopital4">Hopital 4</ion-option>
+              <ion-option value="hopital5">Hopital 5</ion-option>
+              <ion-option value="hopital6">Hopital 6</ion-option>
+              <ion-option value="other">Other</ion-option>
             </ion-select>
           </ion-item>
 
           <ion-item *ngIf='selectedHospital2.value == "other"'>
               <br />
-              <ion-input type="text" placeholder="Please enter your hospital"></ion-input>
+              <ion-input name="hospital2" type="text" placeholder="Please enter your hospital"></ion-input>
           </ion-item>
 
           <!-- Personnal doctor -->
-          <ion-item  [hidden]="switchButtonState">
-              <ion-label floating>Personnal doctor</ion-label>
-              <ion-input [class.invalid]="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)" formControlName="username" type="text"></ion-input>
+          <ion-item  [hidden]="!switchButtonState">
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor2.valid && (slideTwoForm.controls.personnalDoctor2.dirty || submitAttempt)" formControlName="personnalDoctor2" type="text"></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)">
-              <p>Sorry, that username can not be used!</p>
+          <ion-item *ngIf="!slideTwoForm.controls.personnalDoctor2.valid && (slideTwoForm.controls.personnalDoctor2.dirty || submitAttempt)">
+              <p>Please enter a personal doctor.</p>
           </ion-item>
         <!-- End Hospital 2 -->
 
         <!-- Hospital 3 -->
-          <ion-buttons start *ngIf="switchButtonState">
-            <button ion-button (click)="switchButtonState2 = !switchButtonState2">
+          <ion-buttons start text-left *ngIf="switchButtonState">
+            <button ion-button outline clear large (click)="switchButtonState2 = !switchButtonState2" icon-only>
               <ion-icon name="add-circle"></ion-icon>
-              Test
             </button>
           </ion-buttons>
 
           <ion-item [hidden]="!switchButtonState2">
               <ion-label floating>Hospital</ion-label>
-              <ion-select [class.invalid]="!slideTwoForm.controls.privacy.valid && (slideTwoForm.controls.privacy.dirty || submitAttempt)" formControlName="privacy" #selectedHospital3>
-                  <ion-option value="public" checked="true">Public</ion-option>
-                  <ion-option value="friends">Friends Only</ion-option>
-                  <ion-option value="private">Private</ion-option>
-                  <ion-option value="public" checked="true">Public</ion-option>
-                  <ion-option value="friends2">Friends Only</ion-option>
-                  <ion-option value="private2">Private</ion-option>
-                  <ion-option value="other">Other</ion-option>
+              <ion-select [class.invalid]="!slideTwoForm.controls.hospital3.valid && (slideTwoForm.controls.hospital3.dirty || submitAttempt)" formControlName="hospital3" #selectedHospital3>
+                <ion-option value="hopital1" checked="true">Hopital 1</ion-option>
+                <ion-option value="hopital2">Hopital 2</ion-option>
+                <ion-option value="hopital3">Hopital 3</ion-option>
+                <ion-option value="hopital4">Hopital 4</ion-option>
+                <ion-option value="hopital5">Hopital 5</ion-option>
+                <ion-option value="hopital6">Hopital 6</ion-option>
+                <ion-option value="other">Other</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item *ngIf='selectedHospital3.value == "other"'>
               <br />
-              <ion-input type="text" placeholder="Please enter your hospital"></ion-input>
+              <ion-input name="hospital3" type="text" placeholder="Please enter your hospital"></ion-input>
           </ion-item>
 
           <!-- Personnal doctor -->
-          <ion-item [hidden]="switchButtonState2">
-              <ion-label floating>Personnal doctor</ion-label>
-              <ion-input [class.invalid]="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)" formControlName="username" type="text"></ion-input>
+          <ion-item [hidden]="!switchButtonState2">
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor3.valid && (slideTwoForm.controls.personnalDoctor3.dirty || submitAttempt)" formControlName="personnalDoctor3" type="text"></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="!slideTwoForm.controls.username.valid && (slideTwoForm.controls.username.dirty || submitAttempt)">
-              <p>Sorry, that username can not be used!</p>
+          <ion-item *ngIf="!slideTwoForm.controls.personnalDoctor3.valid && (slideTwoForm.controls.personnalDoctor3.dirty || submitAttempt)">
+              <p>Please enter a personal doctor.</p>
           </ion-item>
           <!-- End Hospital 3 -->
         </form>
         <!-- End Form: Medical Providers information -->
       </ion-list>
+
       <!-- Submit button -->
-      <button ion-button full color="primary" (click)="save()">Create Account!</button>
+      <div class="text-center">
+        <button ion-button round (click)="request()">Push to request</button>
+      </div>
+
     </ion-slide>
     <!-- End Slide Register 2 -->
 
@@ -278,21 +286,114 @@
       <ion-list no-lines>
         <!-- Form: Health problems information -->
         <form [formGroup]="slideThreeForm">
-          <!-- Bios -->
-          <ion-item>
-              <ion-label floating>Biolo</ion-label>
-              <ion-textarea formControlName="biolo"></ion-textarea>
+
+          <ion-item text-left>
+          <p (click)="allergiesToggle=!allergiesToggle" tappable>
+            <ion-icon name="add"></ion-icon>
+            Allergies
+          </p>
+          <hr no-margin>
           </ion-item>
+
+          <ion-item [hidden]="isAllToggleOn()">
+            <ion-label>Alimentaires</ion-label>
+            <ion-select multiple="true" formControlName="allergieAlimentaire">
+              <ion-option value="1">Bacon</ion-option>
+              <ion-option value="2">Black Olives</ion-option>
+              <ion-option value="3">Extra Cheese</ion-option>
+              <ion-option value="4">Mushrooms</ion-option>
+              <ion-option value="5">Pepperoni</ion-option>
+              <ion-option value="6">Sausage</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item text-left>
+          <p (click)="chronicToggle=!chronicToggle" tappable>
+            <ion-icon name="add"></ion-icon>
+            Chronic disease
+          </p>
+          <hr no-margin>
+          </ion-item>
+
+          <!-- Bios -->
+          <ion-item [hidden]="isChroToggleOn()">
+              <ion-textarea placeholder="Chronic Diseases" formControlName="chronicDisease"></ion-textarea>
+          </ion-item>
+
+          <ion-item text-left>
+          <p (click)="hereditaryToggle=!hereditaryToggle" tappable>
+            <ion-icon name="add"></ion-icon>
+            Hereditary disease
+          </p>
+          <hr no-margin>
+          </ion-item>
+
+          <ion-item [hidden]="isHereToggleOn()">
+              <ion-textarea placeholder="Hereditary Diseases" formControlName="hereditaryDisease"></ion-textarea>
+          </ion-item>
+
         </form>
+        <!--
+        <ion-list>
+          <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items">
+            <ion-thumbnail item-start>
+              <img src="http://placehold.it/100">
+            </ion-thumbnail>
+            <h2>My Neighbor Totoro</h2>
+            <p>Hayao Miyazaki • 1988</p>
+            <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded">
+              <ion-item>
+                c bien
+              </ion-item>
+            </expandable>
+            <button ion-button clear item-end>View</button>
+          </button>
+        </ion-list>
+        -->
+
         <!-- End Form: Health problems information -->
       </ion-list>
       <!-- Submit button -->
-      <button ion-button full color="primary" (click)="save()">Create Account!</button>
     </ion-slide>
     <!-- End Slide Register 3 -->
 
-  </ion-slides> <br/>
+  </ion-slides>
   <!-- End Slides -->
+
+  <!-- Start Footer -->
+  <ion-footer no-border text-center>
+    <ion-navbar color='white'>
+      <!-- Start: Title + Arrows -->
+      <ion-row justify-content-center>
+        <ion-col col-4>
+          <ion-buttons start *ngIf='arrowLeft!="none"'>
+            <button ion-button icon-left (click)="prev()">
+              <ion-icon name="arrow-round-back"></ion-icon>
+              <br/>
+              {{arrowLeft}}
+            </button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col col-4 text-center>
+          <button ion-button round (click)="save()">Save</button>
+        </ion-col>
+        <ion-col col-4>
+          <ion-buttons end *ngIf='arrowRight!="none"'>
+            <button ion-button icon-right (click)="next()">
+              <br/>
+              {{arrowRight}}
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <!-- End: Title + Arrows -->
+      <!-- button
+      <button ion-button round (click)="save()">Save</button>
+      -->
+    </ion-navbar>
+  </ion-footer>
+  <!-- End Footer -->
 
 </ion-content>
 <!-- End Content -->
