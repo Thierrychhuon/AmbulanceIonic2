@@ -1,31 +1,6 @@
 <!-- Start Header -->
 <ion-header no-border >
   <ion-navbar color="whiteprimary" padding-top>
-    <!-- Start: Title + Arrows
-    <ion-row justify-content-center>
-      <ion-col col-4>
-        <ion-buttons start *ngIf='arrowLeft!="none"'>
-          <button ion-button icon-left (click)="prev()">
-            <ion-icon name="arrow-round-back"></ion-icon>
-            {{arrowLeft}}
-          </button>
-        </ion-buttons>
-      </ion-col>
-      <ion-col col-4 text-center>
-        <ion-title>
-          <h1 ion-text no-margin color="primary">Register</h1>
-        </ion-title>
-      </ion-col>
-      <ion-col col-4>
-        <ion-buttons end *ngIf='arrowRight!="none"'>
-          <button ion-button icon-right (click)="next()">
-            {{arrowRight}}
-            <ion-icon name="arrow-round-forward"></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-col>
-    </ion-row>
-     End: Title + Arrows -->
     <ion-title text-center>
       Register
     </ion-title>
@@ -333,6 +308,7 @@
           </ion-item>
 
         </form>
+
         <!--
         <ion-list>
           <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items">
@@ -360,40 +336,40 @@
   </ion-slides>
   <!-- End Slides -->
 
-  <!-- Start Footer -->
-  <ion-footer no-border text-center>
-    <ion-navbar color='white'>
-      <!-- Start: Title + Arrows -->
-      <ion-row justify-content-center>
-        <ion-col col-4>
-          <ion-buttons start *ngIf='arrowLeft!="none"'>
-            <button ion-button icon-left (click)="prev()">
-              <ion-icon name="arrow-round-back"></ion-icon>
-              <br/>
-              {{arrowLeft}}
-            </button>
-          </ion-buttons>
-        </ion-col>
-        <ion-col col-4 text-center>
-          <button ion-button round (click)="save()">Save</button>
-        </ion-col>
-        <ion-col col-4>
-          <ion-buttons end *ngIf='arrowRight!="none"'>
-            <button ion-button icon-right (click)="next()">
-              <br/>
-              {{arrowRight}}
-              <ion-icon name="arrow-round-forward"></ion-icon>
-            </button>
-          </ion-buttons>
-        </ion-col>
-      </ion-row>
-      <!-- End: Title + Arrows -->
-      <!-- button
-      <button ion-button round (click)="save()">Save</button>
-      -->
-    </ion-navbar>
-  </ion-footer>
-  <!-- End Footer -->
-
 </ion-content>
 <!-- End Content -->
+
+<!-- Start Footer -->
+<ion-footer applyFooter no-border text-center>
+  <ion-navbar color='white'>
+    <!-- Start: Title + Arrows -->
+    <ion-row justify-content-center>
+      <ion-col col-4>
+        <ion-buttons start *ngIf='arrowLeft!="none"'>
+          <button ion-button icon-left (click)="prev()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+            <br/>
+            {{arrowLeft}}
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <button class="applyFooter" ion-button round (click)="save()">Saveee</button>
+      </ion-col>
+      <ion-col col-4>
+        <ion-buttons end *ngIf='arrowRight!="none"'>
+          <button ion-button icon-right (click)="next()">
+            <br/>
+            {{arrowRight}}
+            <ion-icon name="arrow-round-forward"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <!-- End: Title + Arrows -->
+    <!-- button
+    <button ion-button round (click)="save()">Save</button>
+    -->
+  </ion-navbar>
+</ion-footer>
+<!-- End Footer -->

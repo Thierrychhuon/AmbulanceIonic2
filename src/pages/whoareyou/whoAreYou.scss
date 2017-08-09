@@ -18,4 +18,20 @@ page-who {
     margin-left: 10%;
     margin-right:10%;
   }
+
+  ion-grid, .progressbar {
+    padding-top: 0px !important;
+  }
+
+  p.question{
+    margin-top: 25%;
+    margin-bottom: 15%;
+    font-size: 1.5em;
+    color: #807D7A;
+  }
+
+  ::-webkit-scrollbar{
+  display: none;
+  }
+
 }

@@ -5,12 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { WhoPage } from '../pages/whoareyou/whoAreYou';
+import { RegisterPage } from '../pages/register2/register2';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = RegisterPage;
   public userInformation;
   private storage: Storage;
 
@@ -43,5 +44,5 @@ export class MyApp {
     }
   }
   /* ------ */
-  
+
 }

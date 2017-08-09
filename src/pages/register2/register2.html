@@ -1,30 +1,352 @@
-<ion-header no-border >
-  <ion-navbar color="white" padding-top>
+<!--*********** Header ************** -->
+<ion-header no-border>
+  <ion-navbar color="primary" padding-top>
     <ion-title text-center>
       Register
     </ion-title>
   </ion-navbar>
 </ion-header>
+<!--*********** END Header ************** -->
 
 <ion-content>
 
-  <ion-row>
-    <ion-col no-padding col-xs-4>
-      <hr class="page-mark-dark">
-    </ion-col>
-    <ion-col no-padding col-xs-4>
-      <hr class="page-mark-light">
-      <p class="register-titles"> Medical Providers </p>
-    </ion-col>
-    <ion-col no-padding col-xs-4>
-      <hr class="page-mark-light">
-    </ion-col>
-  </ion-row>
+    <!--*********** Slide Title Bar ************** -->
+    <ion-grid ion-fixed progressbar *ngIf='currentSlide=="Identification"'>
+      <ion-row justify-content-bottom>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideI()">
+          <p class="register-titles-dark"> {{currentSlide}} </p>
+          <hr class="page-mark-dark">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideM()">
+          <p class="register-titles-light"> Medical providers </p>
+          <hr class="page-mark-light">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideH()">
+          <p class="register-titles-light"> Health problems </p>
+          <hr class="page-mark-light">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  
+    <ion-grid ion-fixed progressbar *ngIf='currentSlide=="Medical providers"'>
+      <ion-row>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideI()">
+          <p class="register-titles-light"> Identification </p>
+          <hr class="page-mark-light">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideM()">
+          <p class="register-titles-dark"> {{currentSlide}} </p>
+          <hr class="page-mark-dark">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideH()">
+          <p class="register-titles-light"> Health problems </p>
+          <hr class="page-mark-light">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <ion-grid ion-fixed progressbar *ngIf='currentSlide=="Health problems"'>
+      <ion-row>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideI()">
+          <p class="register-titles-light"> Identification </p>
+          <hr class="page-mark-light">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideM()">
+          <p class="register-titles-light"> Medical providers </p>
+          <hr class="page-mark-light">
+        </ion-col>
+        <ion-col no-padding col-4 white tappable (click)="goToSlideH()">
+          <p class="register-titles-dark"> {{currentSlide}} </p>
+          <hr class="page-mark-dark">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--*********** END Slide Title Bar ************** -->
+
+    <ion-slides #signUpSlider (ionSlideWillChange)="onSlideChange($event)">
+
+      <!--*********** Slide One ************** -->
+      <ion-slide #slideOne>
+
+      <!-- Form: Basics information "slideOneForm" -->
+      <form padding [formGroup]="slideOneForm" (ngSubmit)="onSubmit(slideOneForm.value)">
+
+        <!-- Alert information missing -->
+        <p no-margin class="alertform" *ngIf="submitAttempt" style="color: #ea6153;"><br />Please fill out all details accurately. </p>
+
+        <!-- Name -->
+        <ion-item>
+          <ion-label floating>First Name</ion-label>
+          <ion-input formControlName="firstName" type="text" [class.invalid]="!slideOneForm.controls.firstName.valid && (slideOneForm.controls.firstName.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.firstName">
+          <ion-item *ngIf="slideOneForm.get('firstName').hasError(validation.type) && (slideOneForm.controls.firstName.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+        <!-- Lastname -->
+        <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input formControlName="lastName" type="text" [class.invalid]="!slideOneForm.controls.lastName.valid && (slideOneForm.controls.lastName.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.lastName">
+          <ion-item *ngIf="slideOneForm.get('lastName').hasError(validation.type) && (slideOneForm.controls.lastName.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+        <!-- Email -->
+        <ion-item>
+          <ion-label floating>Email address</ion-label>
+          <ion-input [textMask]="emailMask" formControlName="email" type="text" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)"></ion-input>
+          <small>We'll never give the address to ....</small>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <ion-item *ngIf="slideOneForm.get('email').hasError(validation.type) && (slideOneForm.controls.email.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+        <!-- Telephone -->
+        <ion-item>
+          <ion-label floating>Telephone</ion-label>
+          <ion-input formControlName="telephone" type="tel"[class.invalid]="!slideOneForm.controls.telephone.valid && (slideOneForm.controls.telephone.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.telephone">
+          <ion-item *ngIf="slideOneForm.get('telephone').hasError(validation.type) && (slideOneForm.controls.telephone.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+        <!-- Gender -->
+        <ion-item>
+            <ion-label floating>Gender</ion-label>
+            <ion-select [class.invalid]="!slideOneForm.controls.gender.valid && (slideOneForm.controls.gender.dirty || submitAttempt)" formControlName="gender" cancelText="Cancel" okText="OK">
+                 <ion-option *ngFor="let gender of genders" [value]="gender" >{{ gender }}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.gender">
+          <ion-item *ngIf="slideOneForm.get('gender').hasError(validation.type) && (slideOneForm.controls.gender.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+        <!-- Date of birth -->
+        <ion-item>
+          <ion-label floating>Date of birth</ion-label>
+          <ion-datetime displayFormat="MMMM DD, YYYY" pickerFormat="MMMM DD YYYY" formControlName="dateOfBirth"></ion-datetime>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validation_messages.dateOfBirth">
+          <ion-item *ngIf="slideOneForm.get('dateOfBirth').hasError(validation.type) && (slideOneForm.controls.dateOfBirth.dirty || submitAttempt)">
+              <p class="invalid">{{ validation.message }}</p>
+          </ion-item>
+        </ng-container>
+
+      </form>
+
+      </ion-slide>
+      <!--*********** End Slide One ************** -->
+
+      <!--*********** Slide Two ************** -->
+      <ion-slide #slideTwo>
+
+        <!-- Form: Hospital information "slideOneTwo" -->
+        <form [formGroup]="slideTwoForm">
+
+          <!-- Hospital 1 -->
+          <ion-item>
+              <ion-label floating>Hospital</ion-label>
+              <ion-select [class.invalid]="!slideTwoForm.controls.hospital.valid && (slideTwoForm.controls.hospital.dirty || submitAttempt)" formControlName="hospital" #selectedHospital>
+                  <ion-option *ngFor="let hospital of hospitals" [value]="hospital" >{{ hospital }}</ion-option>
+              </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf='selectedHospital.value == "Other"'>
+              <ion-input formControlName="hospital" type="text" placeholder="Please enter your hospital" [class.invalid]="!slideTwoForm.controls.hospital.valid && (slideTwoForm.controls.hospital.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.hospital">
+            <ion-item *ngIf="slideTwoForm.get('hospital').hasError(validation.type) && (slideTwoForm.controls.hospital.dirty || submitAttempt)">
+                <p class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+
+          <!-- Personnal doctor -->
+          <ion-item>
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor.valid && (slideTwoForm.controls.personnalDoctor.dirty || submitAttempt)" formControlName="personnalDoctor" type="text"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.personnalDoctor">
+            <ion-item *ngIf="slideTwoForm.get('personnalDoctor').hasError(validation.type) && (slideTwoForm.controls.personnalDoctor.dirty || submitAttempt)">
+                <p class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+          <!-- End Hospital 1 -->
+
+          <!-- Hospital 2-->
+          <br />
+          <ion-buttons start text-left>
+            <button ion-button outline clear (click)="switchButtonState = !switchButtonState" icon-only>
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-buttons>
+
+          <ion-item [hidden]="!switchButtonState">
+            <ion-label floating>Hospital</ion-label>
+            <ion-select [class.invalid]="!slideTwoForm.controls.hospital2.valid && (slideTwoForm.controls.hospital2.dirty || submitAttempt)" formControlName="hospital2" #selectedHospital2>
+              <ion-option *ngFor="let hospital of hospitals" [value]="hospital2" >{{ hospital }}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf='selectedHospital2.value == "Other"'>
+              <ion-input formControlName="hospital2" type="text" placeholder="Please enter your hospital" [class.invalid]="!slideTwoForm.controls.hospital2.valid && (slideTwoForm.controls.hospital2.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.hospital2">
+            <ion-item *ngIf="slideTwoForm.get('hospital2').hasError(validation.type) && (slideTwoForm.controls.hospital2.dirty || submitAttempt)">
+                <p class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+
+          <!-- Personnal doctor -->
+          <ion-item  [hidden]="!switchButtonState">
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor2.valid && (slideTwoForm.controls.personnalDoctor2.dirty || submitAttempt)" formControlName="personnalDoctor2" type="text"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.personnalDoctor2">
+            <ion-item *ngIf="slideTwoForm.get('personnalDoctor2').hasError(validation.type) && (slideTwoForm.controls.personnalDoctor2.dirty || submitAttempt)">
+                <p class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+        <!-- End Hospital 2 -->
+
+        <!-- Hospital 3 -->
+          <br />
+          <ion-buttons start text-left *ngIf="switchButtonState">
+            <button ion-button outline clear (click)="switchButtonState2 = !switchButtonState2" icon-only>
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-buttons>
+
+          <ion-item [hidden]="!switchButtonState2">
+              <ion-label floating>Hospital</ion-label>
+              <ion-select [class.invalid]="!slideTwoForm.controls.hospital3.valid && (slideTwoForm.controls.hospital3.dirty || submitAttempt)" formControlName="hospital3" #selectedHospital3>
+                <ion-option *ngFor="let hospital of hospitals" [value]="hospital3" >{{ hospital }}</ion-option>
+              </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf='selectedHospital3.value == "Other"'>
+              <ion-input formControlName="hospital3" type="text" placeholder="Please enter your hospital" [class.invalid]="!slideTwoForm.controls.hospital3.valid && (slideTwoForm.controls.hospital3.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.hospital3">
+            <ion-item *ngIf="slideTwoForm.get('hospital3').hasError(validation.type) && (slideTwoForm.controls.hospital3.dirty || submitAttempt)">
+                <p class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+
+          <!-- Personnal doctor -->
+          <ion-item [hidden]="!switchButtonState2">
+              <ion-label floating>Personal doctor</ion-label>
+              <ion-input [class.invalid]="!slideTwoForm.controls.personnalDoctor3.valid && (slideTwoForm.controls.personnalDoctor3.dirty || submitAttempt)" formControlName="personnalDoctor3" type="text"></ion-input>
+          </ion-item>
+
+          <ng-container *ngFor="let validation of validation_messages.personnalDoctor3">
+            <ion-item *ngIf="slideTwoForm.get('personnalDoctor3').hasError(validation.type) && (slideTwoForm.controls.personnalDoctor3.dirty || submitAttempt)">
+                <p  class="invalid">{{ validation.message }}</p>
+            </ion-item>
+          </ng-container>
+          <!-- End Hospital 3 -->
+        </form>
+      </ion-slide>
+      <!--*********** End Slide Two ************** -->
+
+      <!--*********** Slide Three ************** -->
+      <ion-slide #slideThree>
+        <ion-list no-lines>
+          <form [formGroup]="slideThreeForm">
+
+            <ion-item text-left padding-top>
+            <p (click)="allergiesToggle=!allergiesToggle" tappable>
+              <ion-icon name="add"></ion-icon>
+              Allergies
+            </p>
+            <hr no-margin>
+            </ion-item>
+
+            <ion-item [hidden]="isAllToggleOn()">
+              <ion-label padding-left>Medicine</ion-label>
+              <ion-select multiple="true" formControlName="allergiesM" cancelText="Cancel" okText="OK">
+                <ion-option *ngFor="let allergie of allergiesM" [value]="allergie" >{{ allergie }}</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item text-left>
+            <p (click)="chronicToggle=!chronicToggle" tappable>
+              <ion-icon name="add"></ion-icon>
+              Chronic disease
+            </p>
+            <hr no-margin>
+            </ion-item>
+
+            <ion-item [hidden]="isChroToggleOn()">
+                <ion-textarea placeholder="Chronic Diseases" formControlName="chronicDisease"></ion-textarea>
+            </ion-item>
+
+            <ion-item text-left>
+            <p (click)="hereditaryToggle=!hereditaryToggle" tappable>
+              <ion-icon name="add"></ion-icon>
+              Hereditary disease
+            </p>
+            <hr no-margin>
+            </ion-item>
+
+            <ion-item [hidden]="isHereToggleOn()">
+                <ion-textarea placeholder="Hereditary Diseases" formControlName="hereditaryDisease"></ion-textarea>
+            </ion-item>
+
+          </form>
+        </ion-list>
+      </ion-slide>
+      <!--*********** End Slide Three ************** -->
+
+  </ion-slides>
+
 </ion-content>
+<!-- End Content -->
+
+
+<!-- Footer -->
+<ion-footer no-border text-center>
+  <ion-navbar color='white'>
+    <ion-row justify-content-center>
+      <ion-col col-3>
+        <ion-buttons *ngIf='arrowLeft!="none"'>
+          <button ion-button small icon-only (click)="prev()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-6 text-center>
+        <button ion-button small round (click)="save()">Saveee</button>
+        <button ion-button small round (click)="test()">Click stp</button>
+      </ion-col>
+      <ion-col col-3>
+        <ion-buttons *ngIf='arrowRight!="none"'>
+          <button ion-button small icon-only (click)="next()">
+            <ion-icon name="arrow-round-forward"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-footer>

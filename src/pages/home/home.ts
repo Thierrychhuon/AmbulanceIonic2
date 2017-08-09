@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { NavController, Slides } from 'ionic-angular';
 import { HospitalValidator } from  '../../validators/hospital';
-import { ButtonCheckbox } from '../../component/button-radio.component'
-
 import { WhoPage } from '../whoareyou/whoAreYou';
 
 @Component({
@@ -149,6 +147,7 @@ export class HomePage {
   isHereToggleOn() {
       return this.hereditaryToggle;
   };
+
 /*-- STUB functions --/
 //Send data from phone and get the hash, the Id, and a json if there are a mismatch. These data will be read and stored into a json.
 sendDataToServer(dataFromPhone){

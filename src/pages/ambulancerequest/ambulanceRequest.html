@@ -1,38 +1,43 @@
 <!-- Start Header -->
 <ion-header no-border >
   <!-- hideBackButton="true" -->
-  <ion-navbar color="whitedanger" padding-top text-center>
-    <ion-title> Request for Mrs/M. </ion-title>
+  <ion-navbar color="danger" padding-top>
+    <ion-title text-center> Request for {{this.gender}} {{userName}}</ion-title>
   </ion-navbar>
 </ion-header>
 <!-- End Header -->
 
 <!-- Start Content -->
-<ion-content>
+<ion-content scroll="false">
   <!-- Start: Slide Title Bar -->
-  <ion-grid ion-fixed progressbar>
+  <ion-grid ion-fixed no-padding progressbar>
     <ion-row>
       <ion-col no-padding col-6>
-        <hr class="page-mark-dark">
         <p class="register-titles-dark" (click)="goToLocation()" tappable> Location </p>
+        <hr class="page-mark-dark">
       </ion-col>
       <ion-col no-padding col-6>
-        <hr class="page-mark-light">
         <p class="register-titles-light" (click)="goToSymptoms()" tappable> Symptoms </p>
+        <hr class="page-mark-light">
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-slides #ambulanceSlider>
-    <ion-slide>
-        <p> Google map</p>
+  <!--<ion-slides #requestSlider>
+    <ion-slide #slideLocation>
+  -->
+      <div #map id="map"></div>
+  <!--
     </ion-slide>
-
-    <ion-slide>
-        <p> Symptoms</p>
-        <!-- Select not enough effective -> ion card ? accordion list ? Custom Form? -->
+    <ion-slide #slideSymptoms>
+      Test 2
     </ion-slide>
   </ion-slides>
-
+  -->
 </ion-content>
 <!-- End Content -->
+
+<!-- Footer -->
+<ion-footer no-margin>
+    <button ion-button no-margin block color="danger">Saveee</button>
+</ion-footer>

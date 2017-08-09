@@ -78,7 +78,7 @@ page-home {
   }
 
   ion-input, ion-select, ion-textarea {
-    background-color: #f2f2f2;
+    background-color: transparent;
     padding: 5px 10px;
   }
 
@@ -104,6 +104,23 @@ page-home {
             align-items: baseline;
         }
     }
+  }
+
+  ion-button{
+    font-size: .5em;
+  }
+
+  body.keyboard-is-open .scroll-content {
+   margin-bottom: 0 !important;
+  }
+
+  body.keyboard-is-open .fixed-content {
+   margin-bottom: 0 !important;
+  }
+
+  body.keyboard-is-open .applyFooter{
+         display: none;
+         bottom: 0;
   }
 
 }
