@@ -55,7 +55,7 @@ export class AmbulancePage {
   // ---------------------Google map -------------------//
   loadGoogleMaps(){
 
-  this.addConnectivityListeners();
+    this.addConnectivityListeners();
 
   if(typeof google == "undefined" || typeof google.maps == "undefined"){
 

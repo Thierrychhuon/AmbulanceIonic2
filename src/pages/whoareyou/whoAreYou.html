@@ -1,8 +1,12 @@
 <!-- Start Header -->
 <ion-header no-border >
-  <!-- hideBackButton="true" -->
   <ion-navbar color="danger" padding-top>
-    <ion-title text-center> Ambulance request </ion-title>
+    <ion-row nowrap>
+      <ion-title padding-left text-center> Ambulance request </ion-title>
+      <button ion-button icon-only color="danger" (click)="goToUpdate()">
+        <ion-icon name="md-settings" outline></ion-icon>
+      </button>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 <!-- End Header -->
@@ -29,6 +33,9 @@
       </ion-col>
       <ion-col text-left>
         <button class="circle-btn" color="danger" ion-button round outline circle-btn (click)="goToBystander()">No</button>
+      </ion-col>
+      <ion-col text-left>
+        <button class="circle-btn" color="danger" ion-button round outline circle-btn (click)="test()">Go</button>
       </ion-col>
     </ion-row>
   </ion-grid>

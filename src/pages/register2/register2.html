@@ -61,11 +61,20 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ion-grid ion-fixed progressbar *ngIf='currentSlide=="Update"'>
+      <ion-row>
+        <ion-col no-padding col-12 white>
+          <p class="register-titles-dark"> Update Profile </p>
+          <hr class="page-mark-dark">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <!--*********** END Slide Title Bar ************** -->
 
     <ion-slides #signUpSlider (ionSlideWillChange)="onSlideChange($event)">
 
-      <!--*********** Slide One ************** -->
+      <!--*********** Slide Identification ************** -->
       <ion-slide #slideOne>
 
       <!-- Form: Basics information "slideOneForm" -->
@@ -152,9 +161,9 @@
       </form>
 
       </ion-slide>
-      <!--*********** End Slide One ************** -->
+      <!--*********** End Slide Identification ************** -->
 
-      <!--*********** Slide Two ************** -->
+      <!--*********** Slide Personal Doctor ************** -->
       <ion-slide #slideTwo>
 
         <!-- Form: Hospital information "slideOneTwo" -->
@@ -268,9 +277,9 @@
           <!-- End Hospital 3 -->
         </form>
       </ion-slide>
-      <!--*********** End Slide Two ************** -->
+      <!--*********** End Slide Personal Doctor ************** -->
 
-      <!--*********** Slide Three ************** -->
+      <!--*********** Slide Health Problems ************** -->
       <ion-slide #slideThree>
         <ion-list no-lines>
           <form [formGroup]="slideThreeForm">
@@ -299,7 +308,8 @@
             </ion-item>
 
             <ion-item [hidden]="isChroToggleOn()">
-                <ion-textarea placeholder="Chronic Diseases" formControlName="chronicDisease"></ion-textarea>
+                <ion-label floating>Chronic Diseases</ion-label>
+                <ion-textarea formControlName="chronicDisease"></ion-textarea>
             </ion-item>
 
             <ion-item text-left>
@@ -311,13 +321,14 @@
             </ion-item>
 
             <ion-item [hidden]="isHereToggleOn()">
-                <ion-textarea placeholder="Hereditary Diseases" formControlName="hereditaryDisease"></ion-textarea>
+                <ion-label floating>Hereditary Diseases</ion-label>
+                <ion-textarea formControlName="hereditaryDisease"></ion-textarea>
             </ion-item>
 
           </form>
         </ion-list>
       </ion-slide>
-      <!--*********** End Slide Three ************** -->
+      <!--*********** End Slide Health Problems ************** -->
 
   </ion-slides>
 
@@ -339,6 +350,8 @@
       <ion-col col-6 text-center>
         <button ion-button small round (click)="save()">Saveee</button>
         <button ion-button small round (click)="test()">Click stp</button>
+        <button ion-button small round (click)="remove()">What's stored2?</button>
+        <button ion-button small round (click)="getdatastored()">What's stored?</button>
       </ion-col>
       <ion-col col-3>
         <ion-buttons *ngIf='arrowRight!="none"'>

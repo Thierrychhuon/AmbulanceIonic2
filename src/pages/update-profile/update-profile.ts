@@ -8,12 +8,10 @@ import { LocalStorageProvider } from '../../providers/local-storage/local-storag
 import { PostServiceProvider } from '../../providers/post-service/post-service';
 
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register2.html'
+  selector: 'page-update-profile',
+  templateUrl: 'update-profile.html'
 })
-export class RegisterPage {
-
-  @ViewChild('signUpSlider') signUpSlider: Slides ;
+export class UpdateProfilePage {
 
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
@@ -122,8 +120,9 @@ export class RegisterPage {
     ]
   }
 
-  //ionViewDidLoad() {
-  //}
+  ionViewDidLoad() {
+    this.initUpdate();
+  }
 
   validation_messages = {
     'firstName': [
@@ -188,87 +187,48 @@ export class RegisterPage {
 
 
   // Test
-  test(){ this.navCtrl.setRoot(WhoPage); }
-  remove(){ console.log("remove"); this.localStorage.removeAll(); }
+  test(){
+    var jojo;
+    let dataP = this.localStorage.getItem('slideOneData');
+    dataP.then(data => {
+      console.log('1'+data);
+      console.log('1'+JSON.parse(data));
+      console.log('1'+JSON.parse(data)['firstName']);
+    });
+    console.log('1'+dataP);
+    console.log('1'+JSON.parse(jojo));
+  }
 
-  getdatastored(){
-      for (let field of this.slideOneArray) {
-        console.log(field);
-        this.localStorage.getData('slideOneData',field);
+  initUpdate(){
+    let dataP = this.localStorage.getItem('slideOneData');
+    dataP.then(data => {
+      for (let field2 of this.slideOneArray) {
+        this.slideOneForm.controls[field2].setValue(JSON.parse(data)[field2]);
+        console.log('1'+JSON.parse(data));
       }
-      for (let field of this.slideTwoArray) {
-        console.log(field);
-        this.localStorage.getData('slideTwoData',field);
+    });
+
+    let dataP2 = this.localStorage.getItem('slideTwoData');
+    dataP2.then(data => {
+      for (let field3 of this.slideTwoArray) {
+        this.slideTwoForm.controls[field3].setValue(JSON.parse(data)[field3]);
+        console.log('2'+data);
       }
+    });
+
+    let dataP3 = this.localStorage.getItem('slideThreeData');
+    dataP3.then(data => {
       for (let field of this.slideThreeArray) {
-        console.log(field);
-        this.localStorage.getData('slideThreeData',field);
+        this.slideThreeForm.controls[field].setValue(JSON.parse(data)[field]);
+        console.log('3'+JSON.parse(data)[field]);
       }
+    });
+
   }
 
   getdatastored2(){
       console.log("jojo")
       this.localStorage.getData('slideOneData','firstName');
-  }
-
-  // Slide navigation
-  next(){
-    this.signUpSlider.slideNext();
-    console.log(this.arrowLeft)
-    console.log(this.arrowRight)
-  }
-  prev(){ this.signUpSlider.slidePrev(); }
-  goToSlideI(){ this.signUpSlider.slideTo(0); }
-  goToSlideM(){ this.signUpSlider.slideTo(1); }
-  goToSlideH(){ this.signUpSlider.slideTo(2); }
-
-  onSlideChange(slide) {
-    // You can use the slide parameter to get info from it or just use the slider reference to know the index of the active slide
-    let currentIndex = this.signUpSlider.getActiveIndex();
-    if(currentIndex == 0){
-      this.arrowLeft = 'none';
-      this.arrowRight='Medical providers';
-      this.currentSlide="Identification";
-    }else if(currentIndex == 1){
-      this.arrowLeft = 'Identification';
-      this.arrowRight='Health problems';
-      this.currentSlide="Medical providers";
-    }else if(currentIndex == 2){
-      this.arrowLeft = 'Identification';
-      this.arrowRight='none';
-      this.currentSlide="Health problems";
-    }else{
-      this.currentSlide="Update";
-      this.arrowLeft = 'Identification';
-      this.arrowRight='none';
-    }
-    //this.title = "Slider " + currentIndex;
-  }
-
-  // Submit button
-  save(){
-    this.submitAttempt = true;
-    if(!this.slideOneForm.valid){
-        this.signUpSlider.slideTo(0);
-    }
-    else if(!this.slideTwoForm.valid){
-        this.signUpSlider.slideTo(1);
-    }
-    else if(!this.slideThreeForm.valid){
-        this.signUpSlider.slideTo(2);
-    }
-    else {
-        console.log("success!")
-        console.log(this.slideOneForm.value);
-        console.log(this.slideTwoForm.value);
-        console.log(this.slideThreeForm.value);
-        this.localStorage.storeData('slideOneData',this.slideOneForm.value);
-        this.localStorage.storeData('slideTwoData',this.slideTwoForm.value);
-        this.localStorage.storeData('slideThreeData',this.slideThreeForm.value);
-        //Send data to server
-        //let response = this.postService.registration(Object.assign(this.slideOneForm.value, this.slideTwoForm.value,this.slideThreeForm.value));
-        //this.navCtrl.setRoot(WhoPage);
-    }
   }
 
   //If Other is on
@@ -288,20 +248,31 @@ export class RegisterPage {
       return this.hereditaryToggle;
   };
 
-  //Manage response from Server
-  registrationManagement(data){
-    data.then(data =>{
-      if(data.requestStatus=='success'){
-        this.localStorage.storeData('Hash+ID', data);
-      }else if(data.requestStatus=='similar'){
-        this.localStorage.storeData('SimilarData', data);
-        //Ask the user to choose
-        //Update the server or phone
-        //Delete SimilarData
-      }else{
-        console.log("Error in the registration management")
-      }
-    });
+  // Submit button
+  save(){
+    this.submitAttempt = true;
+    if(this.slideOneForm.valid && this.slideTwoForm.valid && this.slideThreeForm.valid){
+        console.log("Update!")
+        console.log(this.slideOneForm.value);
+        console.log(this.slideTwoForm.value);
+        console.log(this.slideThreeForm.value);
+        let data1= this.localStorage.storeData('slideOneData',this.slideOneForm.value);
+        let data2=this.localStorage.storeData('slideTwoData',this.slideTwoForm.value);
+        let data3=this.localStorage.storeData('slideThreeData',this.slideThreeForm.value);
+        //Send data to server
+        //this.editManagement(this.postService.edit(Object.assign(data1, data2, data3)));
+        this.goBack();
+    }
+  }
+
+  //navigation
+  goBack(){
+    this.navCtrl.setRoot(WhoPage);
+  }
+
+  editManagement(json){
+    //this.localStorage.storeData('Hash', json);
+    console.log("Hash & Id stored")
   }
 
 }
