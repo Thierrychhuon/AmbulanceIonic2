@@ -267,7 +267,7 @@ export class RegisterPage {
         this.localStorage.storeData('slideThreeData',this.slideThreeForm.value);
         //Send data to server
         //let response = this.postService.registration(Object.assign(this.slideOneForm.value, this.slideTwoForm.value,this.slideThreeForm.value));
-        //this.navCtrl.setRoot(WhoPage);
+        this.navCtrl.setRoot(WhoPage);
     }
   }
 

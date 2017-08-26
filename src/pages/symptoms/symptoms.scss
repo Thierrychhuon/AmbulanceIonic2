@@ -1,0 +1,70 @@
+page-symptoms{
+
+  .page-mark-light{
+    border-top: 3px solid #ffcdd2;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .page-mark-dark{
+    border-top: 3px solid #b71c1c;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .register-titles-dark{
+    text-align: center;
+    text-transform: uppercase;
+    color:#b71c1c ;
+    font-size: .7em;
+  }
+
+  .register-titles-light{
+    text-align: center;
+    text-transform: uppercase;
+    color:#ffcdd2 ;
+    font-size: .7em;
+  }
+
+  #map {
+    margin-top: 10.5%;
+    height: 93%;
+    width: auto;
+     //max-height: none !important;
+     //margin-top: 10%;
+     //margin-bottom: 20%;
+   }
+
+   ion-grid, .progressbar {
+     padding-top: 0px !important;
+   }
+
+   #slideLocation, .scroll-content {
+     padding-bottom: 0px !important;
+     //height: 100%
+   }
+
+   ::-webkit-scrollbar{
+   display: none;
+   }
+
+   ion-col, .white{
+     background-color: #fff;
+   }
+
+  /*
+  <ion-slides #ambulanceSlider>
+    <ion-slide>
+      <ion-item>
+          <div #map id="map"></div>
+          <p> Lolololol <p>
+      </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+        <p> Symptoms</p>
+        <!-- Select not enough effective -> ion card ? accordion list ? Custom Form? -->
+    </ion-slide>
+  </ion-slides>
+  */
+
+}

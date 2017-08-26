@@ -6,16 +6,16 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerO
  Marker } from '@ionic-native/google-maps';
 import 'rxjs/add/operator/map';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
-import { SymptomsPage } from '../symptoms/symptoms';
+import { AmbulancePage } from '../ambulancerequest/ambulanceRequest';
 
 declare var google;
 
 @Component({
-  selector: 'page-ambulance',
-  templateUrl: 'ambulanceRequest.html'
+  selector: 'page-symptoms',
+  templateUrl: 'symptoms.html'
 })
 
-export class AmbulancePage {
+export class SymptomsPage {
 
   @ViewChild('requestSlider') requestSlider: Slides ;
   //@ViewChild('map') mapElement: ElementRef;
@@ -29,6 +29,9 @@ export class AmbulancePage {
   public userName: string;
   public gender: string;
 
+  params: Object;
+  pushPage: any;
+
   constructor(public navCtrl: NavController, public connectivityService: ConnectivityServiceProvider,
     private geoloc: Geolocation, public platform: Platform, private googleMaps: GoogleMaps, public localStorage: LocalStorageProvider) {
     //this.loadGoogleMaps();
@@ -36,6 +39,9 @@ export class AmbulancePage {
     this.otherSlide="Symptoms";
     this.userName="Jean";
     this.gender="M.";
+
+    this.pushPage = SymptomsPage;
+    this.params = { id: 5 };
   }
 
   ngAfterViewInit() {
@@ -47,8 +53,6 @@ export class AmbulancePage {
     //this.currentSlide="Symptoms";
     //this.otherSlide="Location";
     //console.log("next")
-    this.navCtrl.push(SymptomsPage);
-
   }
 
   goToLocation(){
@@ -56,6 +60,7 @@ export class AmbulancePage {
     //this.currentSlide="Location";
     //this.otherSlide="Symptoms";
     //console.log("previous")
+    this.navCtrl.pop(SymptomsPage);
   }
 
   loadMap() {

@@ -13,12 +13,12 @@
   <ion-grid ion-fixed no-padding progressbar>
     <ion-row>
       <ion-col no-padding col-6>
-        <p class="register-titles-dark" (click)="goToLocation()" tappable> Location </p>
-        <hr class="page-mark-dark">
+        <p class="register-titles-light" (click)="goToLocation()" tappable> Location </p>
+        <hr class="page-mark-light">
       </ion-col>
       <ion-col no-padding col-6>
-        <p class="register-titles-light" (click)="goToSymptoms()" tappable> Symptoms </p>
-        <hr class="page-mark-light">
+        <p class="register-titles-dark" (click)="goToSymptoms()" tappable> Symptoms </p>
+        <hr class="page-mark-dark">
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -26,7 +26,12 @@
   <!--<ion-slides #requestSlider>
     <ion-slide #slideLocation>
   -->
-  <div #map id="map"></div>
+  <br/><br/><br/><br/><br/><br/>
+  <button ion-button [navPush]="pushPage" [navParams]="params">Go</button>
+
+  <p>Are you bleeding ? YES / NO</p>
+  <p>Can you move ? YES / NO</p>
+  <p>Are you in danger ? YES / NO</p>
   <!--
     </ion-slide>
     <ion-slide #slideSymptoms>

@@ -12,6 +12,7 @@ import { WhoPage } from '../pages/whoareyou/whoAreYou';
 import { AmbulancePage } from '../pages/ambulancerequest/ambulanceRequest';
 import { RegisterPage } from '../pages/register2/register2';
 import { UpdateProfilePage } from '../pages/update-profile/update-profile';
+import { SymptomsPage } from '../pages/symptoms/symptoms';
 
 //Providers
 import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
@@ -22,6 +23,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { ValidatorsModule } from '../validators/validators.module';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { PostServiceProvider } from '../providers/post-service/post-service';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng,} from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { PostServiceProvider } from '../providers/post-service/post-service';
     AmbulancePage,
     ExpandableComponent,
     RegisterPage,
-    UpdateProfilePage
+    UpdateProfilePage,
+    SymptomsPage
 
   ],
   imports: [
@@ -47,7 +50,8 @@ import { PostServiceProvider } from '../providers/post-service/post-service';
     WhoPage,
     AmbulancePage,
     RegisterPage,
-    UpdateProfilePage
+    UpdateProfilePage,
+    SymptomsPage
   ],
   providers: [
     StatusBar,
@@ -58,7 +62,8 @@ import { PostServiceProvider } from '../providers/post-service/post-service';
     Geolocation,
     LocalStorageProvider,
     NativeStorage,
-    PostServiceProvider
+    PostServiceProvider,
+    GoogleMaps
   ]
 })
 export class AppModule {}
